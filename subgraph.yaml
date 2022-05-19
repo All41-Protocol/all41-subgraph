@@ -1,0 +1,32 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: All41Exchange
+    network: rinkeby
+    source:
+      address: "0xB453B3B1B2cbC3F8c9b3D40A28571db68B3C5760"
+      abi: All41Exchange
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - DepositedState
+        - OwnershipChanged
+        - TradingFeeRedeemed
+        - WalletAmountRedeemed
+      abis:
+        - name: All41Exchange
+          file: ./abis/All41Exchange.json
+      eventHandlers:
+        - event: DepositedState(address,address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleDepositedState
+        - event: OwnershipChanged(address,address)
+          handler: handleOwnershipChanged
+        - event: TradingFeeRedeemed(uint256)
+          handler: handleTradingFeeRedeemed
+        - event: WalletAmountRedeemed(address,uint256,uint256,uint256)
+          handler: handleWalletAmountRedeemed
+      file: ./src/mapping.ts
