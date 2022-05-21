@@ -1,6 +1,25 @@
-type ExampleEntity @entity {
+type WalletPool @entity {
   id: ID!
-  count: BigInt!
-  wallet: Bytes! # address
-  sender: Bytes! # address
+  wallet: Bytes!      # wallet that owns this pool
+  daiInPool: BigInt!  # amount of dai deposited into this pool
+  cDaiInPool: BigInt! # amount of cDai for this wallet pool
+}
+
+type All41Deposit @entity {
+  id: ID!
+  wallet: Bytes! # wallet pool to be deposited into
+  sender: Bytes! # person that did the depositing
+  daiInPool: BigInt!  # dai in pool after deposit done
+  cDaiInPool: BigInt! # cDai in pool after deposit done
+  totalCost: BigInt!  # daiAmount deposited + tradingFee taken
+  daiAmount: BigInt! # daiAmount deposited
+  tradingFeeInvested: BigInt! # total cDai amount stored for trading fees after deposit done
+}
+
+type All41Withdrawal @entity {
+  id: ID!
+  wallet: Bytes!      # wallet that withdrew (did the withdrawing and wallet pool that funds came from)
+  daiInPool: BigInt!  # dai in pool after withdrawal done
+  cDaiInPool: BigInt!  # cDai left in pool after withdrawal (can call contract methods from frontend to convert cDai to DAI)
+  daiRedeemed: BigInt! # DAI amount subtracted from wallet pool and added to wallet's balances
 }
