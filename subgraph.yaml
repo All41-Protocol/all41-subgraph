@@ -4,9 +4,9 @@ schema:
 dataSources:
   - kind: ethereum
     name: All41Exchange
-    network: goerli
+    network: mainnet
     source:
-      address: "0x36F0B4bd3Dcb99242f82e7dbf2a370111F10F9c4"
+      address: "0xAAAd1DB1aDb2EA0209acB4F3d384a2cac2B84234"
       abi: All41Exchange
     mapping:
       kind: ethereum/events
